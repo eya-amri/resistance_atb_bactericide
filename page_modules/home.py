@@ -3,6 +3,7 @@ from utils.helpers import inject_global_css
 from utils.load_data import CARD_CLASS_DETAILS, CARD_ARO_GENES
 from pathlib import Path
 import base64
+import streamlit.components.v1 as components
 
 
 # ─────────────────────────────────────────────
@@ -26,11 +27,14 @@ def _init():
 # ─────────────────────────────────────────────
 #  HELPER : Convertir image en Base64
 # ─────────────────────────────────────────────
-def img_to_base64(path):
+def img_to_base64(path: str) -> str | None:
     try:
-        with open(path, "rb") as f:
+        full_path = Path(path)
+        if not full_path.exists():
+            return None
+        with open(full_path, "rb") as f:
             return base64.b64encode(f.read()).decode()
-    except FileNotFoundError:
+    except Exception:
         return None
 
 
@@ -249,35 +253,47 @@ def inject_home_css():
     background: linear-gradient(135deg, #0d2137, #023e8a);
     box-shadow: 0 12px 40px rgba(2,62,138,.25);
     margin-top: 16px;
+    height: 380px; /* hauteur globale FIXE */
 }
+
 .carousel-track-wrap {
     overflow: hidden;
     width: 100%;
+    height: 100%;
     position: relative;
 }
+
 .carousel-track {
     display: flex;
+    height: 100%;
     transition: transform .45s cubic-bezier(.4,0,.2,1);
 }
+
 .carousel-slide {
     flex: 0 0 100%;
     width: 100%;
-    min-height: 280px;
+    height: 100%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #0d2137;
 }
+
+/* ✅ IMAGE BIEN ADAPTÉE */
 .carousel-slide img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
+    width: 85%;              /* ↓ réduit la taille */
+    max-height: 240px;       /* ↓ contrôle hauteur */
+    object-fit: contain;     /* 🔥 NE COUPE PAS */
     display: block;
+    margin: auto;
+    border-radius: 12px;
 }
+
+/* placeholder corrigé */
 .carousel-slide .slide-placeholder {
     width: 100%;
-    height: 320px;
+    height: 100%; /* FIX */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -287,7 +303,12 @@ def inject_home_css():
     font-size: .9rem;
     gap: 12px;
 }
-.carousel-slide .slide-placeholder .ph-icon { font-size: 2.5rem; }
+
+.carousel-slide .slide-placeholder .ph-icon {
+    font-size: 2.5rem;
+}
+
+/* boutons */
 .carousel-btn {
     position: absolute;
     top: 50%;
@@ -296,49 +317,64 @@ def inject_home_css():
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255,255,255,.25);
     color: #fff;
-    width: 46px; height: 46px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background .2s, transform .2s;
     z-index: 10;
 }
-.carousel-btn:hover {
-    background: rgba(255,255,255,.35);
-    transform: translateY(-50%) scale(1.08);
-}
-.carousel-btn.prev { left: 14px; }
-.carousel-btn.next { right: 14px; }
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+/* dots */
 .carousel-dots {
-    display: flex; justify-content: center; gap: 8px;
-    padding: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px;
     background: rgba(0,0,0,.2);
 }
+
 .carousel-dot {
-    width: 8px; height: 8px; border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
     background: rgba(255,255,255,.3);
-    cursor: pointer; transition: all .25s;
-    border: none; padding: 0;
+    cursor: pointer;
+    border: none;
 }
+
 .carousel-dot.active {
     background: #fff;
-    width: 22px;
+    width: 20px;
     border-radius: 4px;
 }
+
+/* caption plus compact */
 .carousel-caption {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: linear-gradient(transparent, rgba(2,30,70,.85));
-    padding: 28px 20px 16px;
+    padding: 12px 14px;
     color: #fff;
 }
+
 .carousel-caption .cap-num {
-    font-size: .65rem; font-weight: 700; letter-spacing: 2px;
-    color: var(--sky); text-transform: uppercase; margin-bottom: 4px;
+    font-size: .6rem;
+    font-weight: 700;
+    color: var(--sky);
 }
+
 .carousel-caption .cap-title {
-    font-size: .92rem; font-weight: 700; color: #fff;
+    font-size: .85rem;
+    font-weight: 700;
 }
 
 /* ── Drug classes panel ── */
@@ -743,7 +779,7 @@ def _render_image_carousel():
         if b64:
             slides_html += f"""
             <div class="carousel-slide" id="slide-{i}">
-                <img src="data:image/jpg;base64,{b64}" alt="{caption}">
+                <img src="data:image/jpeg;base64,{b64}">
                 <div class="carousel-caption">
                     <div class="cap-num">Visualisation {i+1} / {n}</div>
                     <div class="cap-title">{caption}</div>
@@ -801,7 +837,7 @@ def _render_image_carousel():
     }})();
     </script>
     """
-    st.markdown(html, unsafe_allow_html=True)
+    components.html(html, height=2000, scrolling=False)
 
 
 def _section_card():
@@ -943,12 +979,11 @@ def _section_card():
     st.markdown('<div class="hdiv"></div>', unsafe_allow_html=True)
 
     # ── Carousel d'images ───────────────────────────
-    
+
     st.markdown(
         """
         <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">
-            Visualisation des top gènes de résistance dans CARD —
-            <span style="color:var(--ocean);font-weight:600;">utilisez les flèches pour naviguer</span>
+            Visualisation de la distribution des classes d'antibiotiques dans CARD
         </p>
         """,
         unsafe_allow_html=True,

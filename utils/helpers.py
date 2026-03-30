@@ -17,10 +17,11 @@ def page_config(title: str = "Résistance ATB"):
 
 
 # ───────────────── GLOBAL CSS ─────────────────
+@st.cache_resource
 def inject_global_css():
-    if "css_injected" in st.session_state:
-        return
-    st.session_state["css_injected"] = True
+    # if "css_injected" in st.session_state:
+    #     return
+    # st.session_state["css_injected"] = True
 
     st.markdown(
         """
@@ -196,9 +197,9 @@ def inject_global_css():
         /* Divider horizontal */
         .custom-divider, .hdiv {
             border: none;
-            height: 1px;
+            height: 0px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 32px 0;
+            margin: 0;
         }
 
         /* Info / success / warning boxes */
@@ -272,7 +273,7 @@ def inject_global_css():
             font-size: 0.72rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: var(--sky);
+            color: #fff;
             font-weight: 700;
             margin-bottom: 6px;
         }
@@ -472,7 +473,7 @@ def render_sidebar() -> str:
         "🔬  Classification Bactéricide / Bactériostatique": "classification",
         "🧪  Approches de Validation": "approches",
         "📊  Résultats Finaux": "resultats",
-        "💬  Discussion": "discussion",
+        "💬  Références": "references",
     }
 
     with st.sidebar:
@@ -526,8 +527,7 @@ def render_footer():
     st.markdown(
         """
         <div class="footer">
-            <strong>Résistance ATB</strong> · IA Biomédicale
-            <div style="font-size:.7rem; margin-top:6px;">Eya Amri · 2026</div>
+            <strong>Résistance ATB</strong> 
         </div>
         """,
         unsafe_allow_html=True,

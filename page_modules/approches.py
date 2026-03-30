@@ -16,11 +16,11 @@ def render():
         """
     <div class="section-card" style="background:linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);">
         <div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:16px; text-align:center; align-items:center;">
-            <div><div style="font-size:1.8rem;">⚙️</div><strong style="color:#1a56db;">App. 1</strong><br><small style="color:#64748b;">Mécanismes ARO</small></div>
+            <div><div style="font-size:1.8rem;">⚙️</div><strong style="color:#1a56db;">Approche. 1</strong><br><small style="color:#64748b;">Mécanismes de résistance</small></div>
             <div style="color:#94a3b8; font-size:1.5rem;">+</div>
-            <div><div style="font-size:1.8rem;">📋</div><strong style="color:#1a56db;">App. 2</strong><br><small style="color:#64748b;">ATC & Réf. Sci.</small></div>
+            <div><div style="font-size:1.8rem;">📋</div><strong style="color:#1a56db;">Approche. 2</strong><br><small style="color:#64748b;">ATC & Réf. Sci.</small></div>
             <div style="color:#94a3b8; font-size:1.5rem;">+</div>
-            <div><div style="font-size:1.8rem;">🧬</div><strong style="color:#1a56db;">App. 3</strong><br><small style="color:#64748b;">Gènes MDR</small></div>
+            <div><div style="font-size:1.8rem;">🧬</div><strong style="color:#1a56db;">Approche. 3</strong><br><small style="color:#64748b;">Gènes MDR</small></div>
             <div style="color:#94a3b8; font-size:1.5rem;">+</div>
             <div><div style="font-size:1.8rem;">✅</div><strong style="color:#16a34a;">10 Classes</strong><br><small style="color:#64748b;">Validées</small></div>
         </div>
@@ -60,8 +60,8 @@ def render():
         st.markdown(
             """
         <div class="section-card" style="background:#f0fdf4; border:1px solid #bbf7d0;">
-            <h4 style="color:#16a34a; margin-top:0;">✅ Résultats App. 1</h4>
-            <p style="color:#475569; font-size:0.88rem; margin-bottom:10px;">Classes identifiées (présentes dans ≥ 2 mécanismes) :</p>
+            <h4 style="color:#16a34a; margin-top:0;">✅ Résultats Approche. 1</h4>
+            <p style="color:#475569; font-size:0.88rem; margin-bottom:10px;">Classes identifiées :</p>
         </div>
         """,
             unsafe_allow_html=True,
@@ -72,16 +72,20 @@ def render():
                 f'<span style="display:inline-block; background:#eff6ff; color:{color}; padding:4px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; margin:3px; border-left:3px solid {color};">{cls}</span>',
                 unsafe_allow_html=True,
             )
-        st.markdown(
-            """
-        <div style="background:#fff7ed; border-radius:8px; padding:10px; margin-top:10px; font-size:0.82rem; color:#d97706;">
-            ⚠️ <strong>Limite :</strong> Ne classe pas directement bactéricide/bactériostatique — nécessite croisement
-        </div>
-        """,
-            unsafe_allow_html=True,
-        )
 
-    with st.expander("📊 Résultats détaillés Approche 1 (heatmap par mécanisme)"):
+    with st.expander("📊 Résultats détaillés Approche 1 "):
+        st.markdown(
+            "Heatmap des mécanismes de résistance communs (≥ 2) entre classes d’antibiotiques"
+        )
+        st.image(
+            "assets/card/heatmap_summary_n2.png",
+            use_container_width=True,
+        )
+        st.markdown("Combinaisons des mécanismes de résistance majeurs")
+        st.image(
+            "assets/card/combo_Inactivation_Tgt_Alteration_Efflux_Tgt_Protection.png",
+            use_container_width=True,
+        )
         st.markdown(
             """
         <div class="section-card">
@@ -98,7 +102,7 @@ def render():
     section_divider()
 
     # ── Approche 2 ────────────────────────────────────────────────
-    st.markdown("## 📋 Approche 2 – Références Scientifiques (Matching ATC)")
+    st.markdown("## 📋 Approche 2 – Références Scientifiques")
     col1, col2 = st.columns([3, 2], gap="large")
     with col1:
         st.markdown(
@@ -108,7 +112,7 @@ def render():
             <p style="color:#475569; line-height:1.8;">
             Cette approche confronte les Drug Classes de CARD avec deux référentiels de classification
             pharmaceutique internationaux via un <strong>algorithme de matching à 2 niveaux</strong>
-            (RapidFuzz, seuil=80).
+            (RapidFuzz, seuil=80).<br>Un seuil minimal de 40 gènes par classe matchée est appliqué pour garantir la robustesse des résultats.
             </p>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
                 <div style="background:#eff6ff; border-radius:8px; padding:12px;">
@@ -146,7 +150,10 @@ def render():
             ("Monobactam", 1310),
             ("Fluoroquinolone antibiotic", 307),
             ("Aminoglycoside antibiotic", 303),
+            ("Glycopeptide antibiotic", 103),
+            ("Rifamycin antibiotic", 63),
         ]
+
         for cls, genes in top_matched:
             pct = int(genes / 3404 * 100)
             st.markdown(
@@ -164,11 +171,22 @@ def render():
             )
         st.markdown(
             """
-        <div style="background:#fff7ed; border-radius:8px; padding:10px; margin-top:10px; font-size:0.82rem; color:#d97706;">
-            ⚠️ 21 classes CARD non matchées dans Réf. Sci. (dont Rifamycine, Nitroimidazole, Phosphonic acid)
-        </div>
-        """,
+            <div style="background:#fff7ed; border-radius:8px; padding:10px; margin-top:10px; font-size:0.82rem; color:#d97706;">
+                ⚠️ La classe "phosphonic acid antibiotic" présente 48 gènes dans la base et possède une activité bactéricide, mais elle n’est pas rapportée dans les références scientifiques utilisées pour les travaux de prédiction de la résistance aux antibiotiques.
+            </div>
+            """,
             unsafe_allow_html=True,
+        )
+    with st.expander("📊 Résultats détaillés Approche 2"):
+        st.markdown("### 📍 Drug Classes matchées avec Références Scientifiques")
+        st.image(
+            "assets/card/fig1_DC_CARD_matchees_ref_scientifique.png",
+            use_container_width=True,
+        )
+        st.markdown("### 📍 Drug Classes NON matchées avec Références Scientifiques")
+        st.image(
+            "assets/card/fig2_DC_CARD_non_matchees_ref_scientifique.png",
+            use_container_width=True,
         )
 
     section_divider()
@@ -189,7 +207,7 @@ def render():
             <strong>Pipeline d'extraction MDR :</strong> Chaque gène ARO → liste Drug Classes + mécanismes → calcul Score MDR → filtrage seuils 2 et 3 → identification TOP genes (score maximum = <strong>13</strong> dans CARD)
             </p>
             <p style="color:#475569; line-height:1.8; margin:0;">
-            <strong>Instances minimum :</strong> 10 gènes/classe | <strong>n total analysé :</strong> 3530 gènes MDR (seuil ≥ 2)
+            <strong>Nombre total de gènes analysé :</strong> 3530 gènes MDR (seuil ≥ 2)
             </p>
         </div>
         """,
@@ -217,52 +235,23 @@ def render():
         ]
         for cls in top_mdr:
             is_bactericide = any(
-                b in cls for b in ["Penicillin", "Cephalo", "Carba", "Monob", "Rifamy"]
+                b in cls
+                for b in [
+                    "Penicillin",
+                    "Cephalo",
+                    "Carba",
+                    "Monob",
+                    "Rifamy",
+                    "Fluoroquinolone",
+                ]
             )
             color = "#1a56db" if is_bactericide else "#64748b"
             st.markdown(
                 f'<span style="display:inline-block; background:#eff6ff; color:{color}; padding:3px 10px; border-radius:6px; font-size:0.80rem; font-weight:600; margin:3px;">{cls}</span>',
                 unsafe_allow_html=True,
             )
-        st.markdown(
-            """
-        <div style="background:#fff7ed; border-radius:8px; padding:10px; margin-top:10px; font-size:0.82rem; color:#d97706;">
-            ⚠️ Score MDR ne préjuge pas de l'activité bactéricide — nécessite croisement
-        </div>
-        """,
-            unsafe_allow_html=True,
+    with st.expander("📊 Résultats détaillés Approche 3"):
+        st.image(
+            "assets/card/figB_seuil2_TOP_CARD_general.png",
+            use_container_width=True,
         )
-
-    section_divider()
-
-    # Bilan global
-    st.markdown("## 📋 Bilan Global de la Démarche Méthodologique")
-    bilan = pd.DataFrame(
-        {
-            "Approche": [
-                "App. 1 – Mécanismes ARO",
-                "App. 2 – Réf. Scientifique",
-                "App. 2 – Réf. ATC",
-                "App. 3 – Gènes MDR",
-                "LLMs Biologiques",
-                "Littérature CMB/CMI",
-            ],
-            "Apport": [
-                "Identification classes avec large spectre de résistance génique dans CARD",
-                "Correspondance CARD ↔ nomenclature internationale validée (25 matchées)",
-                "Standard pharmaceutique OMS (17 matchées) – Monobactam inclus",
-                "Révèle les classes ciblées par les gènes multi-résistants les plus dangereux",
-                "Automatisation rapide – classification à la volée pour grandes listes",
-                "Référence gold standard – ratio quantitatif objectif (CMB/CMI)",
-            ],
-            "Limite": [
-                "Ne classe pas bactéricide/bactériostatique directement",
-                "Certaines classes CARD non référencées (Rifamycine, Nitroimidazole…)",
-                "29 classes non matchées dont Rifamycines, Nitroimidazoles",
-                "Score MDR ne préjuge pas de l'activité bactéricide",
-                "Faux positifs élevés (BioGPT) – discordances sur classes ambiguës",
-                "Nécessite consultation manuelle – double activité = complexité",
-            ],
-        }
-    )
-    st.dataframe(bilan, use_container_width=True, hide_index=True, height=280)

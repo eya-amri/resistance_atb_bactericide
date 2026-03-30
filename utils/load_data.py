@@ -5,14 +5,16 @@ import pandas as pd
 # ──────────────────────────────────────────────
 
 BACTERICIDAL_CLASSES = [
-    "Carbapenem",
-    "Cephalosporin",
-    "Penicillin beta-lactam",
-    "Glycopeptide antibiotic",
-    "Nitroimidazole antibiotic",
-    "Rifamycin antibiotic",
-    "Monobactam",
-    "Phosphonic acid antibiotic",
+    "carbapenem",
+    "cephalosporin",
+    "glycopeptide antibiotic",
+    "nitroimidazole antibiotic",
+    "penicillin beta-lactam",
+    "phosphonic acid antibiotic",
+    "rifamycin antibiotic",
+    "monobactam",
+    "aminoglycosides",
+    "fluoroquinolones",
 ]
 
 BACTERIOSTATIC_CLASSES = [
@@ -34,6 +36,44 @@ DUAL_CLASSES = [
     "Tetracycline antibiotic",
     "Glycylcycline",
     "Phenicol antibiotic",
+]
+
+BACTERICIDAL_CLASSES_STRICT = [
+    "penicillins",
+    "cephalosporins",
+    "carbapenems",
+    "quinolones",
+    "glycopeptides",
+    "lipopeptides",
+    "nitroimidazoles",
+    "polymyxins",
+    "phosphonic acid antibiotics",
+    "rifamycins",
+    "monobactam",
+]
+
+CARD_BACTERICIDE = [
+    "carbapenem",
+    "cephalosporin",
+    "glycopeptide antibiotic",
+    "nitroimidazole antibiotic",
+    "penicillin beta-lactam",
+    "phosphonic acid antibiotic",
+    "rifamycin antibiotic",
+    "monobactam",
+    "aminoglycosides",
+    "fluoroquinolones",
+]
+
+CARD_BACTERICIDE_STRICT = [
+    "carbapenem",
+    "cephalosporin",
+    "glycopeptide antibiotic",
+    "nitroimidazole antibiotic",
+    "penicillin beta-lactam",
+    "phosphonic acid antibiotic",
+    "rifamycin antibiotic",
+    "monobactam",
 ]
 
 CARD_ARO_GENES = {
@@ -417,7 +457,6 @@ def get_approche1_results():
         "Penicillin Beta-Lactam",
         "Fluoroquinolone antibiotic",
         "Monobactam",
-        "Tetracycline Antibiotic",
         "Rifamycin Antibiotic",
     ]
 

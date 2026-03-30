@@ -35,9 +35,9 @@ elif selected_page == "📊  Résultats Finaux":
 
     resultats.render()
 
-elif selected_page == "💬  Discussion":
-    from page_modules import discussion
+elif selected_page == "💬  Références":
+    from page_modules import references
 
-    discussion.render()
+    references.render()
 
 render_footer()

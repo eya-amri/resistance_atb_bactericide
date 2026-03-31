@@ -14,7 +14,7 @@ BACTERICIDAL_DASHBOARD/
 │   ├── load_data.py         # Données et DataFrames
 │   ├── charts.py            # Graphiques Plotly
 │   └── helpers.py           # CSS, composants UI
-└── pages/
+└── page_modules/
     ├── home.py              # 🏠 Accueil
     ├── definitions.py       # 📖 Definitions et Classification bactéricide
     ├── approches.py         # 🧪 Approches de Validation

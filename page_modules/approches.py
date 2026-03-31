@@ -156,8 +156,8 @@ def render():
             st.markdown("### 📌 Classes non communes")
             st.markdown(
                 """
-                    Ces images mettent en évidence les classes d’antibiotiques rares ou spécifiques à certains mécanismes.  
-                    Elles permettent d’identifier les résistances uniques ou moins fréquentes.
+                    Cette image met en évidence les classes d’antibiotiques rares ou spécifiques à certains mécanismes.  
+                    Elle permet d’identifier les résistances uniques ou moins fréquentes.
                     """
             )
             st.image(nc_path, use_container_width=True)

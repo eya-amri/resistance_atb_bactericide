@@ -267,6 +267,11 @@ def inject_global_css():
             box-shadow: 0 2px 12px rgba(0,100,180,0.06);
             margin-bottom: 16px;
         }
+        .section-card:hover {
+            background: linear-gradient(135deg, #e6f2ff 0%, #cceaff 100%);
+            border-radius: 16px;
+            border: 1.5px solid var(--sky);
+        }
 
         /* Section headings */
         .sh-eyebrow {

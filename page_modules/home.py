@@ -343,7 +343,7 @@ def _section_presentation():
     # ── Contexte — utilise .hbanner de helpers.py ──
     st.markdown(
         """
-        <strong style="color:var(--navy);">Contexte :</strong>
+        <strong style="color:var(--navy);">Contexte </strong>
         <div class="hbanner">
             La résistance aux antimicrobiens (RAM) est l'un des défis majeurs de la santé publique mondiale.
             L'émergence de souches multirésistantes (MDR) rend les traitements conventionnels inefficaces.
@@ -358,7 +358,8 @@ def _section_presentation():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.markdown(
-            '<p class="sh-eyebrow">Objectifs du projet</p>', unsafe_allow_html=True
+            '<p class="sh-eyebrow" style="color:var(--navy);">Objectifs du projet</p>',
+            unsafe_allow_html=True,
         )
         for num, title, desc in [
             (
@@ -661,63 +662,6 @@ def _render_image_gallery():
         "assets/card/top7_card.png",
         use_container_width=True,
     )
-
-    # BASE_DIR = (
-    #     Path(__file__).resolve().parent.parent
-    # )  # remonte d'un niveau depuis page_modules
-
-    # img_paths = [
-    #     (
-    #         BASE_DIR / "assets" / "card" / "top1_card.jpg",
-    #         "Distribution des classes ATB — Vue 1",
-    #     ),
-    #     (
-    #         BASE_DIR / "assets" / "card" / "top2_card.png",
-    #         "Distribution des classes ATB — Vue 2",
-    #     ),
-    #     (
-    #         BASE_DIR / "assets" / "card" / "top3_card.png",
-    #         "Distribution des classes ATB — Vue 3",
-    #     ),
-    #     (BASE_DIR / "assets" / "card" / "top7_card.png", "Top 7 classes ATB"),
-    # ]
-
-    # n = len(img_paths)
-
-    # for i, (p, caption) in enumerate(img_paths):
-
-    #     if Path(p).exists():
-    #         st.image(
-    #             {p: caption},
-    #             use_container_width=True,
-    #         )
-
-    #         st.markdown(
-    #             f"""
-    #             <div class="img-gallery-item">
-    #                 <img src="{p}" style="width:100%; border-radius:12px;">
-    #                 <div class="img-gallery-caption">
-    #                     <div class="cap-num">Visualisation {i+1} / {n}</div>
-    #                     <div class="cap-title">{caption}</div>
-    #                 </div>
-    #             </div>
-    #             """,
-    #             unsafe_allow_html=True,
-    #         )
-
-    #     else:
-    #         st.markdown(
-    #             f"""
-    #             <div class="img-gallery-item">
-    #                 <div class="img-placeholder">
-    #                     <div class="ph-icon">📊</div>
-    #                     <div>{caption}</div>
-    #                     <div style="font-size:.72rem;opacity:.6;">Image non disponible</div>
-    #                 </div>
-    #             </div>
-    #             """,
-    #             unsafe_allow_html=True,
-    #         )
 
 
 def _section_card():

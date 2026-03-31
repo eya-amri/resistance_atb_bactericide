@@ -806,7 +806,7 @@ def _section_card():
     img_label = (
         "🔼 Masquer les visualisations"
         if st.session_state.show_img_modal
-        else "📊 Voir résultats →"
+        else "📊 Voir les distributions des classes d'antibiotiques dans CARD →"
     )
     if st.button(
         img_label, key="btn_img_modal", use_container_width=True, type="primary"

@@ -11,7 +11,7 @@ def render():
         """
         <div class="hbanner">
             Après avoir identifié les classes bactéricides dans CARD, l’objectif est d’en évaluer l’importance biologique et clinique.<br>
-            Pour cela, trois approches complémentaires ont été mises en place : analyser la concentration de mécanismes de résistance (Approche 1),
+            Pour cela, trois approches complémentaires ont été mises en place : analyser les mécanismes de résistance (Approche 1),
             valider les correspondances avec les références scientifiques et pharmaceutiques (Approche 2), et étudier l’implication des gènes dans la multi-résistance (Approche 3). 
             Cette démarche permet de croiser les sources d’information et de confirmer la pertinence des classes identifiées.</p>
         </div>
@@ -157,7 +157,7 @@ def render():
             st.markdown(
                 """
                     Cette image met en évidence les classes d’antibiotiques rares ou spécifiques à certains mécanismes.  
-                    Elle permet d’identifier les résistances uniques ou moins fréquentes.
+                    Elle permet d’identifier les classes qui ne partagent pas de mécanismes communs avec d’autres,          
                     """
             )
             st.image(nc_path, use_container_width=True)
@@ -205,8 +205,8 @@ def render():
                 "n5",
                 "À **N=5** (tous les mécanismes), seulement **3 classes** persistent.",
             )
-        st.markdown(
-            """
+    st.markdown(
+        """
         <div class="section-card">
         <p style="color:#475569;">Les heatmaps N=2, N=3, N=4 et N=5 mécanismes montrent que
         <strong>Cephalosporin, Penicillin beta-lactam, Carbapenem, Monobactam</strong>
@@ -215,8 +215,8 @@ def render():
         <strong>Fluoroquinolone (303 gènes)</strong>, Tetracycline (181), Rifamycin (63).</p>
         </div>
         """,
-            unsafe_allow_html=True,
-        )
+        unsafe_allow_html=True,
+    )
 
     section_divider()
 
@@ -261,7 +261,7 @@ def render():
         st.markdown(
             """
         <div class="section-card">
-            <h4 style="color:#1a56db; margin-top:0;">📊 Résultats (Top classes matchées)</h4>
+            <h4 style="color:#1a56db; margin-top:0;">📊 Résultats (Top classes bactéricides matchées)</h4>
         </div>
         """,
             unsafe_allow_html=True,
@@ -343,8 +343,9 @@ def render():
                 tout en excluant les cas isolés ou peu significatifs.
                 </p>
                 <p style="color:#475569; line-height:1.8;">
-                Cette approche met ainsi en évidence les classes d’antibiotiques les plus souvent ciblées par les gènes multi-résistants, 
-                permettant de <strong>prioriser les familles critiques</strong> dans CARD et d’identifier les combinaisons de résistance les plus préoccupantes en contexte clinique.
+                    Cette approche permet de guider le <strong>repositionnement des classes d’antibiotiques</strong>. 
+                    En identifiant les classes les plus susceptibles d’être <strong>inefficaces contre des profils de résistance multi-gènes</strong>, 
+                    elle aide à <strong>éviter les traitements inutiles</strong> et à orienter les stratégies thérapeutiques de manière plus ciblée face à la multi-résistance bactérienne.
                 </p>
             </div>
             """,

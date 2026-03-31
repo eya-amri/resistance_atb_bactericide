@@ -260,10 +260,10 @@ def render():
     with col2:
         st.markdown(
             """
-        <div class="section-card">
-            <h4 style="color:#1a56db; margin-top:0;">📊 Résultats (Top classes bactéricides matchées)</h4>
-        </div>
-        """,
+            <div class="section-card">
+                <h4 style="color:#1a56db; margin-top:0;">📊 Résultats (Top classes bactéricides matchées)</h4>
+            </div>
+            """,
             unsafe_allow_html=True,
         )
         top_matched = [

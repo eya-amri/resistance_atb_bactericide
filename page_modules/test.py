@@ -1409,3 +1409,7 @@ def render():
         )
 
     st.markdown("<br>", unsafe_allow_html=True)
+
+    #  <p style="color:#475569; line-height:1.8; margin-bottom:10px;">
+    # <strong>Pipeline d'extraction MDR :</strong> Chaque gène ARO → liste Drug Classes + mécanismes → calcul Score MDR → filtrage seuils 2 et 3 → identification TOP genes (score maximum = <strong>13</strong> dans CARD)
+    #  </p>

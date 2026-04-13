@@ -40,4 +40,9 @@ elif selected_page == "💬  Références":
 
     references.render()
 
+elif selected_page == "🧬  Prétraitement des Données":
+    from page_modules import pipeline
+
+    pipeline.render()
+
 render_footer()

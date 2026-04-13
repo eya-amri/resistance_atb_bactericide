@@ -476,10 +476,10 @@ def render_sidebar() -> str:
     pages = {
         "🏠  Présentation du Projet": "home",
         "🔬  Classification Bactéricide / Bactériostatique": "classification",
-        "🧬  Prétraitement des Données": "pipeline",
         "🧪  Approches de Validation": "approches",
         "📊  Résultats Finaux": "resultats",
         "💬  Références": "references",
+        "🧬  Prétraitement des Données": "pipeline",
     }
 
     with st.sidebar:

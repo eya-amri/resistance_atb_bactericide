@@ -176,39 +176,26 @@ def _inject_pipeline_css():
 
     /* ── Data leakage box ── */
     .leakage-box {
-        background: linear-gradient(135deg, #eff6ff, #dbeafe);
-        border: 1px solid #93c5fd;
-        border-left: 4px solid #2563eb;
+        background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+        border: 1px solid #fca5a5;
+        border-left: 4px solid #ef4444;
         border-radius: 16px;
         padding: 22px 26px;
         margin-top: 14px;
         animation: plFadeUp .25s cubic-bezier(.16,1,.3,1) both;
     }
-
     .leakage-box .lb-title {
-        font-size: .95rem;
-        font-weight: 800;
-        color: #1e3a8a;
-        margin-bottom: 14px;
+        font-size: .95rem; font-weight: 800;
+        color: #991b1b; margin-bottom: 14px;
         font-family: 'monospace', sans-serif;
     }
-
-    .leakage-box p {
-        font-size: .85rem;
-        color: #1e40af;
-        line-height: 1.9;
-        margin: 0 0 12px;
-    }
-
+    .leakage-box p { font-size: .85rem; color: #7f1d1d; line-height: 1.9; margin: 0 0 12px; }
     .leakage-example {
-        background: rgba(37, 99, 235, 0.08);
-        border-radius: 12px;
-        padding: 14px 18px;
-        font-size: .82rem;
-        color: #1e3a8a;
-        line-height: 1.8;
-        margin-top: 10px;
-        border: 1px dashed #93c5fd;
+        background: rgba(239,68,68,.07);
+        border-radius: 12px; padding: 14px 18px;
+        font-size: .82rem; color: #7f1d1d;
+        line-height: 1.8; margin-top: 10px;
+        border: 1px dashed #fca5a5;
     }
 
     /* ── Union strategy box ── */
@@ -226,7 +213,7 @@ def _inject_pipeline_css():
         color: #14532d; margin-bottom: 12px;
         font-family: 'monospace', sans-serif;
     }
-    .union-box p { font-size: .85rem; color: #000000; line-height: 1.9; margin: 0 0 10px; }
+    .union-box p { font-size: .85rem; color: #166534; line-height: 1.9; margin: 0 0 10px; }
 
     /* ── Métriques ── */
     .metrics-row { display:flex; gap:14px; flex-wrap:wrap; margin:20px 0; }
@@ -255,10 +242,10 @@ def _inject_pipeline_css():
 
     /* ── Tag justification ── */
     .justif-tag {
-        background: #fffbeb; border:1px solid #00b4d8;
-        border-left: 3px solid #00b4d8;
+        background: #fffbeb; border:1px solid #fcd34d;
+        border-left: 3px solid #f59e0b;
         border-radius: 10px; padding: 12px 16px;
-        font-size: .82rem; color: #0d2137;
+        font-size: .82rem; color: #78350f;
         margin-top: 12px; line-height: 1.8;
     }
 
@@ -410,7 +397,7 @@ def _inject_pipeline_css():
         font-size: .95rem; font-weight: 800; color: #14532d;
         margin-bottom: 12px; font-family: 'monospace', sans-serif;
     }
-    .conclusion-box p { font-size: .85rem; color: #000000; line-height: 1.9; margin: 0; }
+    .conclusion-box p { font-size: .85rem; color: #166534; line-height: 1.9; margin: 0; }
 
     /* ── clstr format box ── */
     .clstr-box {
@@ -603,11 +590,13 @@ def _step_02():
 
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("⚠️ Discussion filtre 1 — Longueur minimale des séquences")
+        st.markdown("**❌ Filtre 1 — Longueur minimale**")
         st.markdown(
             """
-            Les séquences de petite taille peuvent correspondre à des fragments incomplets de gènes et générer des embeddings peu informatifs dans les modèles de type ESM-2, 
-            introduisant ainsi du bruit dans la phase de classification.
+            Suppression de toutes les séquences **< 50 acides aminés**.
+
+            Ces fragments ne représentent pas des gènes fonctionnels complets. Ils génèrent des embeddings 
+            non représentatifs et du bruit dans tout encodeur de séquences protéiques.
             """
         )
         st.markdown(
@@ -617,14 +606,6 @@ def _step_02():
             "adopté comme standard dans les benchmarks AMR."
             "</div>",
             unsafe_allow_html=True,
-        )
-
-        st.markdown(
-            """
-            
-            ❓ Cela soulève donc la question du choix du seuil minimal biologiquement pertinent à adopter pour garantir à la fois la qualité des séquences
-            et la conservation de l’information.
-            """
         )
     with col2:
         st.markdown("**❌ Filtre 2 — Caractères non standard**")
@@ -836,12 +817,12 @@ def _step_03():
 
     st.markdown(
         """
-        <div style="background: linear-gradient(135deg, #e0f2fe, #bae6fd);border:1px solid #60a5fa;border-radius:14px;padding:16px 20px;margin-bottom:16px;font-size:.85rem;color:#0c4a6e;line-height:1.85;">
-        ⚠️ <strong>Deux approches indépendantes</strong> ont été testées sur ce dataset. 
-        Elles produisent des résultats <strong>identiques</strong> (6 285 séquences conservées, 28 doublons supprimés), 
-        ce qui valide la robustesse de la déduplication. Les différences de conception sont expliquées ci-dessous.
-        </div>
-        """,
+    <div style="background:linear-gradient(135deg,#fff8e1,#fef3c7);border:1px solid #fcd34d;border-radius:14px;padding:16px 20px;margin-bottom:16px;font-size:.85rem;color:#78350f;line-height:1.85;">
+    ⚠️ <strong>Deux approches indépendantes</strong> ont été testées sur ce dataset. 
+    Elles produisent des résultats <strong>identiques</strong> (6 285 séquences conservées, 28 doublons supprimés), 
+    ce qui valide la robustesse de la déduplication. Les différences de conception sont expliquées ci-dessous.
+    </div>
+    """,
         unsafe_allow_html=True,
     )
 
@@ -886,37 +867,39 @@ def _step_03():
             unsafe_allow_html=True,
         )
 
+    # Analyse des 28 suppressions
     st.markdown("**📋 Analyse des 28 suppressions MD5 :**")
-
     col1, col2 = st.columns(2)
-
     with col1:
         st.markdown(
             """
-            <div class="approche-card">
-                <div class="ac-header">
-                    <span class="approche-badge">Cas 1 — Majoritaire</span>
-                </div>
-                <strong>Même séquence, ARO différents</strong><br><br>
-                Une même protéine est référencée plusieurs fois dans CARD car associée à plusieurs résistances.
-                Les séquences sont identiques → MD5 supprime les doublons.
+        <div class="approche-card">
+            <div class="ac-header">
+                <span class="approche-badge">Cas 1 — Majoritaire</span>
             </div>
-            """,
+            <strong>Même séquence, ARO différents</strong><br><br>
+            La même protéine (<code>NP_218312.1</code>, <code>NP_218371.1</code>, <code>NP_215774.1</code>) 
+            est référencée plusieurs fois dans CARD car elle confère une résistance à 
+            <em>plusieurs antibiotiques</em>. CARD lui associe un ARO distinct pour chaque résistance, 
+            mais la séquence protéique est rigoureusement identique. MD5 détecte et supprime ces doublons.
+        </div>
+        """,
             unsafe_allow_html=True,
         )
-
     with col2:
         st.markdown(
             """
-            <div class="approche-card">
-                <div class="ac-header">
-                    <span class="approche-badge b">Cas 2 — Minoritaire</span>
-                </div>
-                <strong>Accessions différentes, même séquence</strong><br><br>
-                Même protéine annotée dans différentes souches ou études.
-                Séquence identique → supprimée comme doublon par MD5.
+        <div class="approche-card">
+            <div class="ac-header">
+                <span class="approche-badge b">Cas 2 — Minoritaire</span>
             </div>
-            """,
+            <strong>Accessions différentes, séquence identique</strong><br><br>
+            Protéines annotées indépendamment dans différentes souches bactériennes.<br><br>
+            Ex : <code>AAN43827.1</code> / <code>AAC75291.1</code> — deux accessions pour 
+            le même gène <em>gyrA</em> dans <em>Shigella flexneri</em> et <em>E. coli</em>. 
+            Séquence protéique rigoureusement identique. MD5 les détecte également.
+        </div>
+        """,
             unsafe_allow_html=True,
         )
 
@@ -944,11 +927,11 @@ def _step_03():
                 CD-HIT est un programme de <strong>clustering de séquences biologiques</strong> par similarité.
                 Il regroupe les séquences partageant un pourcentage d'identité ≥ au seuil défini 
                 (paramètre <code>-c</code>). Pour chaque cluster, la séquence la plus longue est 
-                désignée <em>représentante</em> et conservée.
+                désignée <em>représentante</em> et conservée.<br><br>
                 <strong>À 100% d'identité (<code>-c 1.0</code>) :</strong> seules les séquences 
                 rigoureusement identiques sont regroupées. Le paramètre <code>-aS 1.0</code> impose 
                 une couverture totale de la séquence la plus courte, détectant également les cas de 
-                <em>containment exact</em> (séquence A entièrement contenue dans B).
+                <em>containment exact</em> (séquence A entièrement contenue dans B).<br><br>
                 <strong>Résultat sur ce dataset :</strong> 6 285 clusters formés — chaque cluster 
                 contient exactement 1 représentant conservé. <strong>Aucun cas de containment strict 
                 (A ⊂ B) n'a été détecté</strong> dans ce dataset.
@@ -1002,6 +985,7 @@ def _step_03():
                     "Sous-séquence (A ⊂ B)",
                     "Complexité algorithmique",
                     "Dépendances externes",
+                    "Gestion des annotations multiples",
                 ],
                 "MD5": [
                     "✅ Détecté",
@@ -1010,6 +994,7 @@ def _step_03():
                     "❌ Non détecté",
                     "O(n) — très rapide",
                     "Aucune (Python stdlib)",
+                    "✅ Union explicite des drug classes",
                 ],
                 "CD-HIT 100%": [
                     "✅ Détecté",
@@ -1018,6 +1003,7 @@ def _step_03():
                     "❌ Non observé ici",
                     "O(n log n)",
                     "CD-HIT installé",
+                    "⚠️ Représentant unique (annotation principale)",
                 ],
             }
         )
@@ -1338,28 +1324,6 @@ def _step_04():
         unsafe_allow_html=True,
     )
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown(
-            """
-            **Communs aux deux seuils :**
-            - `-g 1` — mode précis : chaque séquence est assignée au cluster **le plus similaire**
-            - Mémoire : `4 000 MB`
-            - Threads : `4`
-            - `-d 0` — accession complète dans le fichier `.clstr`
-            """
-        )
-    with col2:
-        st.markdown(
-            """
-            **Spécifique par seuil :**
-            - Seuil 80% → `-c 0.8 -n 4`
-            - Seuil 90% → `-c 0.9 -n 5`
-
-            Le **word size** (-n) est un pré-filtre basé sur des k-mers.
-            CD-HIT recommande n=5 pour ≥ 90% et n=4 pour 80–90%.
-            """
-        )
     btn_params = (
         "🔼 Masquer les paramètres"
         if st.session_state.show_cdhit_params
@@ -1368,6 +1332,29 @@ def _step_04():
     if st.button(btn_params, key="btn_cdhit_params", type="secondary"):
         st.session_state.show_cdhit_params = not st.session_state.show_cdhit_params
         st.rerun()
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(
+            """
+**Communs aux deux seuils :**
+- `-g 1` — mode précis : chaque séquence est assignée au cluster **le plus similaire**
+- Mémoire : `4 000 MB`
+- Threads : `4`
+- `-d 0` — accession complète dans le fichier `.clstr`
+        """
+        )
+    with col2:
+        st.markdown(
+            """
+**Spécifique par seuil :**
+- Seuil 80% → `-c 0.8 -n 4`
+- Seuil 90% → `-c 0.9 -n 5`
+
+Le **word size** (-n) est un pré-filtre basé sur des k-mers.
+CD-HIT recommande n=5 pour ≥ 90% et n=4 pour 80–90%.
+        """
+        )
 
     if st.session_state.show_cdhit_params:
         st.markdown(
@@ -1407,6 +1394,61 @@ def _step_04():
         """,
             unsafe_allow_html=True,
         )
+
+    # ── Format du fichier .clstr
+    st.markdown(
+        '<div class="subsection-title">📄 Format du fichier de sortie .clstr</div>',
+        unsafe_allow_html=True,
+    )
+
+    btn_clstr = (
+        "🔼 Masquer"
+        if st.session_state.show_clstr_format
+        else "📄 Voir le format .clstr et son parsing ▼"
+    )
+    if st.button(btn_clstr, key="btn_clstr_format", type="secondary"):
+        st.session_state.show_clstr_format = not st.session_state.show_clstr_format
+        st.rerun()
+
+    if st.session_state.show_clstr_format:
+        st.markdown(
+            """
+        <div class="clstr-box">
+            <div class="clstr-line"><span class="cl-cluster">&gt;Cluster 0</span><span class="cl-comment">← début du cluster 0</span></div>
+            <div class="clstr-line"><span class="cl-rep">0   520aa, &gt;AIA08936.1... *</span><span class="cl-comment">← représentant (*), 520 aa</span></div>
+            <div class="clstr-line"><span class="cl-member">1   412aa, &gt;AHF82023.1... </span><span class="cl-pct">at 93%</span><span class="cl-comment">← membre, 93% avec représentant</span></div>
+            <div class="clstr-line"><span class="cl-member">2   401aa, &gt;AHF82024.1... </span><span class="cl-pct">at 91%</span><span class="cl-comment">← membre, 91% avec représentant</span></div>
+            <div style="height:8px;"></div>
+            <div class="clstr-line"><span class="cl-cluster">&gt;Cluster 1</span></div>
+            <div class="clstr-line"><span class="cl-rep">0   395aa, &gt;ACS83748.1... *</span><span class="cl-comment">← représentant du cluster 1</span></div>
+            <div class="clstr-line"><span class="cl-member">1   388aa, &gt;AAR96051.1... </span><span class="cl-pct">at 94%</span></div>
+            <div style="height:8px;"></div>
+            <div class="clstr-line"><span class="cl-cluster">&gt;Cluster 2</span></div>
+            <div class="clstr-line"><span class="cl-rep">0   280aa, &gt;XXXX.1... *</span><span class="cl-comment">← séquence unique, cluster de taille 1</span></div>
+        </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**Parsing Python du fichier .clstr :**")
+        st.code(
+            """def parse_cdhit_clusters(clstr_path: Path) -> set[str]:
+    representatives = set()
+    with open(clstr_path, "r", encoding="utf-8") as fh:
+        for line in fh:
+            if line.startswith(">"):
+                # ">Cluster 0" → début d'un nouveau cluster → ignorer
+                continue
+            if "*" in line:
+                # Ligne représentante : "0    520aa, >AIA08936.1... *"
+                parts = line.split(">")
+                # parts[1] = "AIA08936.1... *"
+                acc = parts[1].split("...")[0].strip()
+                representatives.add(acc)
+    return representatives""",
+            language="python",
+        )
+
     # ── Résultats
     st.markdown(
         '<div class="subsection-title">📊 Résultats comparatifs 80% vs 90%</div>',
@@ -1421,6 +1463,34 @@ def _step_04():
         '<div class="metric-card amber"><div class="mc-val">76.2%</div><div class="mc-lbl">Réduction à 90%</div></div>'
         "</div>",
         unsafe_allow_html=True,
+    )
+
+    import pandas as pd
+
+    df_clust = pd.DataFrame(
+        {
+            "Métrique": [
+                "Séquences en entrée",
+                "Clusters formés",
+                "Représentants conservés",
+                "Séquences supprimées",
+                "Taux de réduction",
+                "Word size (-n)",
+            ],
+            "Seuil 80%": ["6 285", "1 319", "1 319", "4 966", "79.0 %", "4"],
+            "Seuil 90% ✅": ["6 285", "1 497", "1 497", "4 788", "76.2 %", "5"],
+            "Différence": ["—", "+178", "+178", "−178", "−2.8 pts", "—"],
+        }
+    )
+    st.dataframe(df_clust, use_container_width=True, hide_index=True)
+
+    st.markdown(
+        """
+    **Interprétation des 178 séquences de différence :**
+    - À **80%** → elles sont absorbées dans des clusters existants (clustering plus agressif)
+    - À **90%** → elles sont suffisamment différentes pour former leur **propre cluster** (plus de diversité conservée)
+    - Ces 178 séquences seront testées : apportent-elles de l'information ou du bruit ?
+    """
     )
 
     # ── Recommandations
@@ -1452,37 +1522,37 @@ def _step_04():
         )
         st.markdown(
             """
-            Le seuil **90%** est le standard établi dans les benchmarks AMR pour deux raisons :
-            1. **Diversité biologique préservée** : deux séquences à 89% d'identité peuvent avoir des profils de résistance différents
-            2. **Réduction suffisante** : 76.2% de réduction élimine les variants quasi-identiques sans sur-agréger
-            """
+Le seuil **90%** est le standard établi dans les benchmarks AMR pour deux raisons :
+1. **Diversité biologique préservée** : deux séquences à 89% d'identité peuvent avoir des profils de résistance différents
+2. **Réduction suffisante** : 76.2% de réduction élimine les variants quasi-identiques sans sur-agréger
+        """
         )
     with tab2:
         st.info(
             """
-            **Le seuil 80% sera utilisé pour une analyse de robustesse :**
+**Le seuil 80% sera utilisé pour une analyse de robustesse :**
 
-            - Tester si les **178 séquences supplémentaires** apportent de l'information ou du bruit
-            - Comparer les deux modèles entraînés (80% vs 90%) via **F1-score** et **AUC-ROC**
-            - Si performances similaires → les 178 séquences sont redondantes pour le modèle
-            - Si performances différentes → les 178 séquences capturent de la **diversité biologique réelle**
-            """
+- Tester si les **178 séquences supplémentaires** apportent de l'information ou du bruit
+- Comparer les deux modèles entraînés (80% vs 90%) via **F1-score** et **AUC-ROC**
+- Si performances similaires → les 178 séquences sont redondantes pour le modèle
+- Si performances différentes → les 178 séquences capturent de la **diversité biologique réelle**
+        """
         )
     with tab3:
         st.error(
             """
-            **Règle critique — prévention absolue du data leakage :**
+**Règle critique — prévention absolue du data leakage :**
 
-            Toutes les séquences d'un même cluster **doivent rester dans le même split**.
+Toutes les séquences d'un même cluster **doivent rester dans le même split**.
 
-            Le split train/test se fait **au niveau des clusters**, pas des séquences individuelles.
+Le split train/test se fait **au niveau des clusters**, pas des séquences individuelles.
 
-            **Exemple correct :**
-            - Cluster C42 contient 5 variants TEM → toutes les 5 dans le train **ou** toutes dans le test
-            - Jamais 3 dans train et 2 dans test
+**Exemple correct :**
+- Cluster C42 contient 5 variants TEM → toutes les 5 dans le train **ou** toutes dans le test
+- Jamais 3 dans train et 2 dans test
 
-            **Conséquence si violée :** fuite d'information → F1-score artificiellement élevé → modèle qui mémorise.
-            """
+**Conséquence si violée :** fuite d'information → F1-score artificiellement élevé → modèle qui mémorise.
+        """
         )
 
     st.markdown("</div>", unsafe_allow_html=True)
@@ -1531,7 +1601,8 @@ def _pipeline_state_table():
     <div class="hbanner">
     ✅ <strong>Pipeline de prétraitement complété — Étapes 01 à 04.</strong><br>
     Le dataset de <strong>6 285 séquences</strong> est propre, dédupliqué et exempt de redondances. 
-    Le dataset final est prêt pour l'encodage par <strong>ESM-2</strong> et l'entraînement du modèle de prédiction multi-label de résistance aux antibiotiques.
+    Le dataset final de <strong>1 497 séquences</strong> (clustering 90%) est prêt pour l'encodage 
+    par <strong>ESM-2</strong> et l'entraînement du modèle de prédiction multi-label de résistance aux antibiotiques.
     </div>
     """,
         unsafe_allow_html=True,

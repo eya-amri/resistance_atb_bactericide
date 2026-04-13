@@ -3,7 +3,6 @@ import streamlit as st
 from utils.helpers import info_box
 from utils.load_data import BACTERICIDAL_CLASSES, BACTERIOSTATIC_CLASSES, DUAL_CLASSES
 import pandas as pd
-import plotly.graph_objects as go
 
 
 # ─────────────────────────────────────────────────────────────────────────────

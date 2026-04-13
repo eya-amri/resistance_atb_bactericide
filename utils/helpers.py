@@ -177,7 +177,7 @@ def inject_global_css():
 
         /* ── Footer ── */
         .footer {
-            position: fixed;
+            position: relative;
             bottom: 0;
             left: 0;
             right: 0;

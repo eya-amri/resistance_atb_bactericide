@@ -45,4 +45,9 @@ elif selected_page == "🧬  Prétraitement des Données":
 
     pipeline.render()
 
+elif selected_page == "🧬  Pipeline Dataset Négatif":
+    from page_modules import negative_pipeline
+
+    negative_pipeline.render()
+
 render_footer()

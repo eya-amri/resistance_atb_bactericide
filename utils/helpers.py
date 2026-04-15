@@ -480,6 +480,7 @@ def render_sidebar() -> str:
         "📊  Résultats Finaux": "resultats",
         "💬  Références": "references",
         "🧬  Prétraitement des Données": "pipeline",
+        "🧬  Pipeline Dataset Négatif": "negative_pipeline",
     }
 
     with st.sidebar:

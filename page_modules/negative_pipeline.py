@@ -125,6 +125,17 @@ def _inject_neg_pipeline_css():
         margin-top: 16px;
         font-style: italic;
     }
+    .step-content {
+        background: #ffffff;
+        border: 1px solid rgba(0,180,216,.15);
+        border-radius: 24px;
+        padding: 32px 36px;
+        margin-top: 10px;
+        box-shadow: 0 8px 40px rgba(2,62,138,.08), 0 2px 8px rgba(0,0,0,.04);
+        animation: plFadeUp .35s cubic-bezier(.16,1,.3,1) both;
+        position: relative;
+        overflow: hidden;
+    }
     .step-content::before {
         content: '';
         position: absolute;

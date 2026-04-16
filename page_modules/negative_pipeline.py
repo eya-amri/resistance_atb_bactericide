@@ -47,7 +47,7 @@ def _inject_neg_pipeline_css():
         margin-bottom: 12px;
     }
     .po-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         font-weight: 800;
         color: var(--navy);
         margin-bottom: 24px;
@@ -81,25 +81,25 @@ def _inject_neg_pipeline_css():
         transform: translateY(-2px);
     }
     .pf-num {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         font-weight: 600;
         color: var(--muted);
         margin-bottom: 6px;
     }
     .pf-ico {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         display: block;
         margin-bottom: 6px;
     }
     .pf-name {
-        font-size: 0.75rem;
+        font-size: 0.9rem;
         font-weight: 700;
         color: var(--navy);
         margin-bottom: 6px;
         line-height: 1.3;
     }
     .pf-cnt {
-        font-size: 0.7rem;
+        font-size: 0.9rem;
         color: var(--ocean);
         font-weight: 600;
         background: #eef2ff;
@@ -108,13 +108,13 @@ def _inject_neg_pipeline_css():
         border-radius: 20px;
     }
     .pf-status {
-        font-size: 0.65rem;
+        font-size: 0.9rem;
         color: #10b981;
         font-weight: 600;
         margin-left: 6px;
     }
     .pf-arrow {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         color: var(--sky);
         font-weight: 300;
     }

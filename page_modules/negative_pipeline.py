@@ -125,34 +125,28 @@ def _inject_neg_pipeline_css():
         margin-top: 16px;
         font-style: italic;
     }
-    .step-content {
-        background: white;
-        border-radius: 24px;
-        padding: 28px 32px;
-        margin: 24px 0;
-        border: 1px solid #eef2ff;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    .step-content::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--navy), var(--ocean), var(--sky));
     }
+
     .step-header {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 28px;
-        border-bottom: 2px solid var(--ice);
-        padding-bottom: 16px;
+        display: flex; align-items: center; gap: 16px;
+        margin-bottom: 24px;
     }
     .step-num-badge {
         background: linear-gradient(135deg, var(--navy), var(--ocean));
-        color: white;
-        padding: 6px 14px;
-        border-radius: 40px;
-        font-size: 0.8rem;
-        font-weight: 700;
+        color: #fff; border-radius: 10px;
+        padding: 7px 14px; font-size: .65rem;
+        font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+        white-space: nowrap; font-family: 'monospace', sans-serif;
     }
     .step-title-big {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--navy);
+        font-size: 1.3rem; font-weight: 800; color: var(--navy);
+        font-family: 'monospace', sans-serif; letter-spacing: -.3px;
     }
     .metrics-row {
         display: flex;
